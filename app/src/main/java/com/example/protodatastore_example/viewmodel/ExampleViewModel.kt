@@ -13,7 +13,9 @@ class ExampleViewModel @Inject constructor(
     private val repository: ExampleRepository
 ): ViewModel() {
     data class UiState(
-        val result: Int
+        val result: Int,
+        val isEnabledReadButton: Boolean = true,
+        val isEnabledWriteButton: Boolean = true
     )
 
     private val _uiState = MutableStateFlow(UiState(0))
@@ -21,16 +23,17 @@ class ExampleViewModel @Inject constructor(
 
     fun write(result: Int) {
         viewModelScope.launch {
+            _uiState.update { it.copy(isEnabledWriteButton = false) }
             repository.write(result)
+            _uiState.update { it.copy(isEnabledWriteButton = true) }
         }
     }
 
     fun read() {
         viewModelScope.launch {
+            _uiState.update { it.copy(isEnabledReadButton = false) }
             val data = repository.read()
-            _uiState.update {
-                it.copy(result = data.first().result)
-            }
+            _uiState.update { it.copy(result = data.first().result, isEnabledReadButton = true) }
         }
     }
 }

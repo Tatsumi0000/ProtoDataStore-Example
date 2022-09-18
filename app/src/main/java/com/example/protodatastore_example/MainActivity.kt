@@ -26,6 +26,8 @@ class MainActivity : AppCompatActivity() {
         lifecycleScope.launchWhenStarted {
             viewModel.uiState.collectLatest { uiState ->
                 textView.text = uiState.result.toString()
+                writeButton.isEnabled = uiState.isEnabledWriteButton
+                readButton.isEnabled = uiState.isEnabledReadButton
             }
         }
 
