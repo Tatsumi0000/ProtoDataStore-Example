@@ -4,5 +4,5 @@ import kotlinx.serialization.Serializable
 
 @Serializable
 data class ExamplePreferences (
-    var result: Int
+    val result: Int
     )
