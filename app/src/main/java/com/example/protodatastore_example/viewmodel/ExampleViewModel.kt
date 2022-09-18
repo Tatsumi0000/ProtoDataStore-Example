@@ -1,4 +1,4 @@
-package com.example.protodatastore_example
+package com.example.protodatastore_example.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

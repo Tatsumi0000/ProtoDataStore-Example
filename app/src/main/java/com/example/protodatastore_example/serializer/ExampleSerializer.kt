@@ -28,6 +28,4 @@ object ExampleSerializer: Serializer<ExamplePreferences> {
 
     override suspend fun writeTo(t: ExamplePreferences, output: OutputStream) = output.write(ProtoBuf.encodeToByteArray(t))
 
-
-
 }
