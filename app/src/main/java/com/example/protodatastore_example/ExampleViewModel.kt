@@ -4,10 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.example.protodatastore_example.repository.ExampleRepository
 import dagger.hilt.android.lifecycle.HiltViewModel
-import kotlinx.coroutines.flow.MutableStateFlow
-import kotlinx.coroutines.flow.asStateFlow
-import kotlinx.coroutines.flow.first
-import kotlinx.coroutines.flow.update
+import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import javax.inject.Inject
 
@@ -19,8 +16,8 @@ class ExampleViewModel @Inject constructor(
         val result: Int
     )
 
-    private val _uiState = MutableStateFlow<UiState>(UiState(0))
-    val uiState = _uiState.asStateFlow()
+    private val _uiState = MutableStateFlow(UiState(0))
+    val uiState: StateFlow<UiState> = _uiState.asStateFlow()
 
     fun write(result: Int) {
         viewModelScope.launch {
